@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
-  productGUID: 6c60d86c7dcc23f4d90a14c2eaa4e02c
+  productGUID: 33be71b7ee1cadb4d9b1864ea8b8f88e
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: TestTask2508
+  productName: 2508TestTask
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -937,14 +937,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: TestTask2508
+  metroPackageName: 2508TestTask
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: TestTask2508
+  metroApplicationDescription: 2508TestTask
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -1016,10 +1016,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 9d05852f-434c-4964-a497-c20cf86e2f47
+  cloudProjectId: 487f6db9-521d-4040-bbaa-a61d9945e209
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: TestTask2508
+  projectName: 2508TestTask
   organizationId: alik_bit
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
