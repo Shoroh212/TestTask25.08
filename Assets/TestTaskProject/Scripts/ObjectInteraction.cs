@@ -4,13 +4,16 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 [RequireComponent(typeof(XRGrabInteractable))]
-public class ObjectInteraction : MonoBehaviour
+public class ObjectInteraction : MonoBehaviour, IObjectInteraction, IObjectTakenSource
 {
-    [SerializeField] private OrderManager _orderManager;
     [SerializeField] private int _idObject;
 
     private XRGrabInteractable _grabInteractable;
-    public event Action<int> TakeObject;
+
+    public int ObjectId => _idObject;
+    public string ObjectTag => gameObject.tag;
+
+    public event Action<int> ObjectTaken;
 
     private void Awake()
     {
@@ -29,9 +32,6 @@ public class ObjectInteraction : MonoBehaviour
 
     private void OnObjectGrabbed(SelectEnterEventArgs args)
     {
-        string objectTag = gameObject.tag;
-
-        _orderManager.CheckObject(objectTag);
-        TakeObject?.Invoke(_idObject);
+        ObjectTaken?.Invoke(_idObject);
     }
 }

@@ -1,47 +1,63 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class HighlightManager : MonoBehaviour
 {
     [SerializeField] private List<Outline> _lights;
-    [SerializeField] private List<ObjectInteraction> _objects;
 
+    private readonly List<IObjectTakenSource> _objects = new();
 
+    public void Initialize(IEnumerable<IObjectTakenSource> objects)
+    {
+        _objects.AddRange(objects);
 
-    void Start()
+        foreach (var obj in _objects)
+        {
+            obj.ObjectTaken += OnLightObject;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var obj in _objects)
+        {
+            obj.ObjectTaken -= OnLightObject;
+        }
+    }
+
+    private void Start()
     {
         _lights[0].enabled = true;
         _lights[1].enabled = false;
         _lights[2].enabled = false;
-
-    }
-
-    private void OnEnable()
-    {
-        foreach (var obj in _objects)
-        {
-            obj.TakeObject += OnLightObject;
-        }
-    }
-
-    private void OnDisable()
-    {
-        foreach (var obj in _objects)
-        {
-            obj.TakeObject -= OnLightObject;
-        }
     }
 
     private void OnLightObject(int id)
     {
-        if (id == 1)
+        switch (id)
         {
-            _lights[0].enabled = false;
-            _lights[1].enabled = true;
+            case 1:
+                _lights[0].enabled = false;
+                _lights[1].enabled = true;
+                break;
 
+            case 2:
+                _lights[1].enabled = false;
+                _lights[2].enabled = true;
+                break;
 
+            case 3:
+                _lights[2].enabled = false;
+                break;
         }
-        
-
     }
+}
+
+
+
+public interface IObjectTakenSource
+{
+    event Action<int> ObjectTaken;
 }
