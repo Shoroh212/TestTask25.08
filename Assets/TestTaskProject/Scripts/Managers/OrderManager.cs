@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
 
-public class OrderManager : MonoBehaviour, IOrderChecker
+public class OrderManager : MonoBehaviour, ITaskChecker
+
 {
     [Header("Expected order")]
     [SerializeField]
@@ -13,10 +14,9 @@ public class OrderManager : MonoBehaviour, IOrderChecker
 
     private int _currentStep;
 
-    public bool IsCompleted => _currentStep >= _requiredTags.Length;
+    public event Action<int, bool> OnStepResult;
 
-    public event Action OnCorrectAction;
-    public event Action OnWrongAction;
+    public bool IsCompleted => _currentStep >= _requiredTags.Length;
 
     public bool CheckObject(string objectTag)
     {
@@ -27,38 +27,32 @@ public class OrderManager : MonoBehaviour, IOrderChecker
 
         if (objectTag == expectedTag)
         {
-            HandleCorrectAction();
+            OnStepResult?.Invoke(_currentStep, true);
+
+            _currentStep++;
+
             return true;
         }
 
-        HandleWrongAction();
-        return false;
-    }
+        OnStepResult?.Invoke(_currentStep, false);
 
-    private void HandleCorrectAction()
-    {
-        OnCorrectAction?.Invoke();
-
-        _currentStep++;
-
-        if (IsCompleted)
+        // Все следующие шаги тоже считаем проваленными
+        for (int i = _currentStep + 1; i < _requiredTags.Length; i++)
         {
-            Debug.Log("Все действия выполнены правильно.");
+            OnStepResult?.Invoke(i, false);
         }
-    }
 
-    private void HandleWrongAction()
-    {
-        OnWrongAction?.Invoke();
+        _currentStep = _requiredTags.Length;
 
-        Debug.LogWarning(
-            $"Нарушение порядка. " +
-            $"Ожидался тег: {_requiredTags[_currentStep]}"
-        );
+        return false;
     }
 
     public void ResetOrder()
     {
         _currentStep = 0;
     }
+}
+public interface ITaskChecker
+{
+    event Action<int, bool> OnStepResult;
 }

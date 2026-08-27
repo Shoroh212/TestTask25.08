@@ -1,64 +1,60 @@
 using TMPro;
 using UnityEngine;
 
-
 public class TaskPanel : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _taskOne;
-    [SerializeField] private TextMeshProUGUI _taskTwo;
-    [SerializeField] private TextMeshProUGUI _taskThree;
+    [SerializeField] private TextMeshProUGUI[] _tasks;
 
-    [SerializeField] private string _messageOne;
-    [SerializeField] private string _messageTwo;
-    [SerializeField] private string _messageThree;
+    [SerializeField] private string[] _messages;
 
+    private ITaskChecker _taskChecker;
     private IPointChecker _pointChecker;
 
     private void Start()
     {
-        _taskOne.text = _messageOne;
-        _taskTwo.text = _messageTwo;
-        _taskThree.text = _messageThree;
+
+
+     
+        for (int i = 0; i < _tasks.Length; i++)
+        {
+            _tasks[i].text = _messages[i];
+        }
     }
 
-    public void Initialize(IPointChecker pointChecker)
+    public void Initialize(ITaskChecker pointChecker)
     {
-        _pointChecker = pointChecker;
-        _pointChecker.OnCorrectPos += FirstTextColor;
+        _taskChecker = pointChecker;
+
+        _taskChecker.OnStepResult += HandleStepResult;
     }
 
     private void OnDestroy()
     {
-        if (_pointChecker != null)
+        if (_taskChecker != null)
         {
-            _pointChecker.OnCorrectPos -= FirstTextColor;
+            _taskChecker.OnStepResult -= HandleStepResult;
         }
     }
 
-    private void FirstTextColor()
-    {
-        _taskOne.color = Color.green;
-    }
-    private void SecondTextColorTrue()
-    {
-        _taskTwo.color = Color.green;
-    }
-    private void SecondTextColorFalse()
-    {
-        _taskTwo.color = Color.red;
-        ThirdTextColorFalse();
 
-    }
-    private void ThirdTextColorTrue()
+    private void FirstColorText() // вот этот метод должен выполнится если мы дошли до точки 
     {
-        _taskThree.color = Color.green;
-    }
-    private void ThirdTextColorFalse()
-    {
-        _taskThree.color = Color.red;
-
+        _tasks[0].color = Color.green;
     }
 
+    private void HandleStepResult(int stepIndex, bool isCorrect)
+    {
+        if (stepIndex < 0 || stepIndex >= _tasks.Length)
+        {
+            Debug.LogWarning(
+                $"TaskPanel: получен неизвестный индекс шага {stepIndex}"
+            );
 
+            return;
+        }
 
+        _tasks[stepIndex].color = isCorrect
+            ? Color.green
+            : Color.red;
+    }
 }
