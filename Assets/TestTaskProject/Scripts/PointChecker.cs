@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
 
-public class PointChecker : MonoBehaviour
+
+public class PointChecker : MonoBehaviour, IPointChecker
 {
     public event Action OnCorrectPos;
 
@@ -10,11 +11,15 @@ public class PointChecker : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             OnCorrectPos?.Invoke();
+
             Debug.Log("12342");
         }
     }
 }
-
+public interface IPointChecker
+{
+    event Action OnCorrectPos;
+}
 public interface IObjectInteraction
 {
     int ObjectId { get; }
