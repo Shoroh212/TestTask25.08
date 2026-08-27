@@ -16,7 +16,7 @@ public class PointChecker : MonoBehaviour, IPointChecker
             _pointOutline.enabled = false;
             _nextOutline.enabled = true;
             Debug.Log("12342");
-            Destroy(gameObject);
+           // Destroy(gameObject);
         }
     }
 }

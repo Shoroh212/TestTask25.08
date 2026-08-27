@@ -10,7 +10,7 @@ public class TaskPanel : MonoBehaviour
 
     private void Start()
     {
-        _tasks[2].color = Color.red;
+        //_tasks[2].color = Color.red;
         for (int i = 0; i < _tasks.Length; i++)
         {
             _tasks[i].text = _messages[i];

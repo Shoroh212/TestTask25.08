@@ -29,16 +29,18 @@ public class HighlightManager : MonoBehaviour
 
     private void Start()
     {
-        _lights[0].enabled = true;
+        _lights[0].enabled = false;
         _lights[1].enabled = false;
         _lights[2].enabled = false;
     }
 
-    private void OnLightObject(int id)
+    public  void OnLightObject(int id)
     {
+        Debug.LogError("МЫ получили id  " + id);
         switch (id)
         {
             case 1:
+                Debug.LogWarning("МЫ красим ");
                 _lights[0].enabled = false;
                 _lights[1].enabled = true;
                 break;

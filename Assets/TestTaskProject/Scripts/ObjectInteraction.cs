@@ -34,6 +34,7 @@ public class ObjectInteraction : MonoBehaviour, IObjectInteraction, IObjectTaken
     {
         
         ObjectTaken?.Invoke(_idObject);
+        Debug.Log("Mы взяли Объетк ");
         
     }
 }
