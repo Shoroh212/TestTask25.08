@@ -13,12 +13,6 @@ public class UIInstaller : MonoBehaviour
 
     private void Awake()
     {
-        InstallWinPanel();
-        InstallTaskPanel();
-    }
-
-    private void InstallWinPanel()
-    {
         var conclusion = _levelConclusion as ILevelConclusion;
 
         if (conclusion == null)
@@ -30,10 +24,16 @@ public class UIInstaller : MonoBehaviour
             return;
         }
 
+        InstallWinPanel(conclusion);
+        InstallTaskPanel(conclusion);
+    }
+
+    private void InstallWinPanel(ILevelConclusion conclusion)
+    {
         _winPanel.Initialize(conclusion);
     }
 
-    private void InstallTaskPanel()
+    private void InstallTaskPanel(ILevelConclusion conclusion)
     {
         var taskChecker = _taskChecker as ITaskChecker;
 
@@ -46,6 +46,10 @@ public class UIInstaller : MonoBehaviour
             return;
         }
 
-        _taskPanel.Initialize(taskChecker, _pointChecker);
+        _taskPanel.Initialize(
+            taskChecker,
+            _pointChecker,
+            conclusion
+        );
     }
 }

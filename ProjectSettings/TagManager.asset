@@ -7,6 +7,9 @@ TagManager:
   - Anchor
   - Key
   - Ball
+  - Step1
+  - Step2
+  - LastCube
   layers:
   - Default
   - TransparentFX

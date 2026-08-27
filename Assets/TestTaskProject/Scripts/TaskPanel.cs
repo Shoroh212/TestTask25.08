@@ -8,6 +8,7 @@ public class TaskPanel : MonoBehaviour
 
     private ITaskChecker _taskChecker;
     private IPointChecker _pointChecker;
+    private ILevelConclusion _levelConclusion;
 
     private void Start()
     {
@@ -17,17 +18,31 @@ public class TaskPanel : MonoBehaviour
         }
     }
 
-    public void Initialize(ITaskChecker taskChecker, IPointChecker pointChecker)
+    public void Initialize(
+        ITaskChecker taskChecker,
+        IPointChecker pointChecker,
+        ILevelConclusion levelConclusion)
     {
         _taskChecker = taskChecker;
-      _pointChecker = pointChecker;
+        _pointChecker = pointChecker;
+        _levelConclusion = levelConclusion;
 
         if (_taskChecker != null)
         {
             _taskChecker.OnStepResult += OnStepResult;
         }
-        if (_pointChecker != null) { _pointChecker.OnCorrectPos += FirstColorText; Debug.Log("FirstColorText подписан"); }
 
+        if (_pointChecker != null)
+        {
+            _pointChecker.OnCorrectPos += FirstColorText;
+            Debug.Log("FirstColorText подписан");
+        }
+
+        if (_levelConclusion != null)
+        {
+            _levelConclusion.Finished += ThirdTaskCorrect;
+            Debug.Log("ThirdTaskIncorrect подписан");
+        }
     }
 
     private void OnDestroy()
@@ -36,62 +51,55 @@ public class TaskPanel : MonoBehaviour
         {
             _taskChecker.OnStepResult -= OnStepResult;
         }
-        if (_pointChecker != null) { _pointChecker.OnCorrectPos -= FirstColorText; }
-        //if (_pointChecker != null) { _pointChecker.OnCorrectPos -= FirstColorText; }
+
+        if (_pointChecker != null)
+        {
+            _pointChecker.OnCorrectPos -= FirstColorText;
+        }
+
+        if (_levelConclusion != null)
+        {
+            _levelConclusion.Finished -= ThirdTaskCorrect;
+        }
     }
 
     private void OnStepResult(int taskNumber, bool result)
     {
         if (taskNumber == 2)
         {
-            if (result == true)
-            {
+            if (result)
                 SecondTaskCorrect();
-            }
             else
-            {
                 SecondTaskIncorrect();
-            }
         }
         else if (taskNumber == 3)
         {
-            if (result == true)
-            {
+            if (result)
                 ThirdTaskCorrect();
-            }
             else
-            {
                 ThirdTaskIncorrect();
-            }
         }
     }
 
     private void FirstColorText()
     {
         Debug.Log("FirstColorText ВЫЗВАН!");
-        _tasks[0].color = Color.green; 
-        Debug.Log("TaskPanel: точка достигнута, первый таск выполнен");
+        _tasks[0].color = Color.green;
     }
 
     private void SecondTaskCorrect()
     {
         _tasks[1].color = Color.green;
-
-        Debug.Log("TaskPanel: вторая задача выполнена");
     }
 
     private void SecondTaskIncorrect()
     {
         _tasks[1].color = Color.red;
-
-        Debug.Log("TaskPanel: вторая задача провалена");
     }
 
     private void ThirdTaskCorrect()
     {
         _tasks[2].color = Color.green;
-
-        Debug.Log("TaskPanel: третья задача выполнена");
     }
 
     private void ThirdTaskIncorrect()
