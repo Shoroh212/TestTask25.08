@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -37,4 +38,6 @@ public class ObjectInteraction : MonoBehaviour, IObjectInteraction, IObjectTaken
         Debug.Log("Mы взяли Объетк ");
         
     }
+  
+
 }

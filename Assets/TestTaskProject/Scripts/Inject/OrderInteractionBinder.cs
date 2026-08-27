@@ -6,6 +6,7 @@ public class OrderInteractionBinder : MonoBehaviour
     [SerializeField] private ObjectInteraction[] _objects;
     [SerializeField] private OrderManager _orderManager;
     [SerializeField] private HighlightManager _highlightManager;
+    
 
     private void OnEnable()
     {
@@ -14,7 +15,7 @@ public class OrderInteractionBinder : MonoBehaviour
             obj.ObjectTaken += OnObjectTaken;
         }
 
-        _highlightManager.Initialize(_objects);
+    
     }
 
     private void OnDisable()

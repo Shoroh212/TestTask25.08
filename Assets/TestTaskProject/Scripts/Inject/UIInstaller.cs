@@ -7,8 +7,9 @@ public class UIInstaller : MonoBehaviour
     [SerializeField] private WinPanel _winPanel;
 
     [Header("Task Panel")]
-    [SerializeField] private MonoBehaviour _pointChecker;
+    [SerializeField] private MonoBehaviour _taskChecker;
     [SerializeField] private TaskPanel _taskPanel;
+    [SerializeField] private PointChecker _pointChecker;
 
     private void Awake()
     {
@@ -34,17 +35,17 @@ public class UIInstaller : MonoBehaviour
 
     private void InstallTaskPanel()
     {
-        var pointChecker = _pointChecker as IPointChecker;
+        var taskChecker = _taskChecker as ITaskChecker;
 
-        if (pointChecker == null)
+        if (taskChecker == null)
         {
             Debug.LogError(
-                $"{_pointChecker.name} должен реализовывать IPointChecker"
+                $"{_taskChecker.name} должен реализовывать ITaskChecker"
             );
 
             return;
         }
 
-        _taskPanel.Initialize(pointChecker);
+        _taskPanel.Initialize(taskChecker, _pointChecker);
     }
 }
