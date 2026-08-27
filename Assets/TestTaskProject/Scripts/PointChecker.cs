@@ -5,14 +5,18 @@ using UnityEngine;
 public class PointChecker : MonoBehaviour, IPointChecker
 {
     public event Action OnCorrectPos;
+    [SerializeField] private Outline _pointOutline;
+    [SerializeField] private Outline _nextOutline;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             OnCorrectPos?.Invoke();
-
+            _pointOutline.enabled = false;
+            _nextOutline.enabled = true;
             Debug.Log("12342");
+            Destroy(gameObject);
         }
     }
 }

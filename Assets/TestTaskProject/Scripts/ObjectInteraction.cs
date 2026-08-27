@@ -32,6 +32,8 @@ public class ObjectInteraction : MonoBehaviour, IObjectInteraction, IObjectTaken
 
     private void OnObjectGrabbed(SelectEnterEventArgs args)
     {
+        
         ObjectTaken?.Invoke(_idObject);
+        
     }
 }

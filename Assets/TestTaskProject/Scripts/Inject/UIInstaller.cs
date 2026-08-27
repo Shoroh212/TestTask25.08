@@ -34,7 +34,7 @@ public class UIInstaller : MonoBehaviour
 
     private void InstallTaskPanel()
     {
-        var pointChecker = _pointChecker as ITaskChecker;
+        var pointChecker = _pointChecker as IPointChecker;
 
         if (pointChecker == null)
         {
