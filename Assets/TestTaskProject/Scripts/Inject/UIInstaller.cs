@@ -47,9 +47,7 @@ public class UIInstaller : MonoBehaviour
 
         if (taskChecker == null)
         {
-            Debug.LogError(
-                $"{_taskChecker.name} должен реализовывать ITaskChecker"
-            );
+           
 
             return;
         }

@@ -20,7 +20,7 @@ public class ConclusionLVL : MonoBehaviour, ILevelConclusion
         }
     }
 
-    private IEnumerator LoadNextScene()
+    private IEnumerator LoadNextScene()  // Задержка через корутины, но через UniTask было бы лучшее 
     {
         yield return new WaitForSeconds(4f);
 

@@ -33,7 +33,7 @@ public class OrderInteractionBinder : MonoBehaviour
     }
 
     private void OnObjectTaken(int objectId)
-    {
+    {// Находим объект по ID и передаём его данные
         foreach (var obj in _objects)
         {
             if (obj.ObjectId != objectId)
