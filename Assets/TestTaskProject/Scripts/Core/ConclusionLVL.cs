@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+/// <summary> /// Определяет завершение уровня и запускает переход на следующую сцену. /// </summary>
 public class ConclusionLVL : MonoBehaviour, ILevelConclusion
 {
   public event Action Finished;

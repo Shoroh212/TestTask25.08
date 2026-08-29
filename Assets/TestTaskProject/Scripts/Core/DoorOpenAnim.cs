@@ -1,5 +1,11 @@
 using UnityEngine;
-
+/// <summary> ///
+/// 
+/// 
+/// Управляет открытием двери при взаимодействии с ключом.
+/// 
+/// 
+/// /// </summary>
 public class DoorOpenAnim : MonoBehaviour
 {
     [SerializeField] private GameObject _door;
@@ -9,7 +15,7 @@ public class DoorOpenAnim : MonoBehaviour
     private Vector3 _startPosition;
     private Vector3 _targetPosition;
     private bool _isOpening;
-
+    // Плавно перемещаем дверь вверх до заданной позиции.
     private void Start()
     {
         _startPosition = _door.transform.position;
@@ -18,7 +24,7 @@ public class DoorOpenAnim : MonoBehaviour
 
     }
 
-    private void Update()
+    private void Update()    
     {
         if (!_isOpening)
             return;
@@ -36,7 +42,7 @@ public class DoorOpenAnim : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
+    {// Дверь открывается только при попадании в триггер объекта с тегом Key
         if (other.CompareTag("Key"))
         {
             OpeningDoor();

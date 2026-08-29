@@ -1,5 +1,13 @@
 using UnityEngine;
 
+
+
+/// <summary> 
+/// Связывает UI с игровыми системами через интерфейсы
+/// 
+/// /// Выступает точкой настройки зависимостей между компонентами.
+/// </summary>
+
 public class UIInstaller : MonoBehaviour
 {
     [Header("Win Panel")]

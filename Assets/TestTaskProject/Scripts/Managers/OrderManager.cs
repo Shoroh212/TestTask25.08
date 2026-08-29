@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class OrderManager : MonoBehaviour, ITaskChecker
+public class OrderManager : MonoBehaviour, ITaskChecker   // Проверяет правильность выполнения последовательности игровых заданий
 {
     [Header("Expected order")]
     [SerializeField]
@@ -9,7 +9,7 @@ public class OrderManager : MonoBehaviour, ITaskChecker
     {
         "Step1",
         "Step2"
-    };
+    };      //кол-во задач
 
     private int _currentStep;
 
@@ -24,8 +24,8 @@ public class OrderManager : MonoBehaviour, ITaskChecker
 
         string expectedTag = _requiredTags[_currentStep];
 
-        // Step1  задача 2
-        // Step2  задача 3
+        // Step1  задача 1
+        // Step2  задача 2
         int taskNumber = _currentStep + 2;
 
         if (objectTag == expectedTag)

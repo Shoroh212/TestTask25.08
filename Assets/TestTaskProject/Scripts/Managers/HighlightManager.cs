@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+/// <summary>
+/// Управляет подсветкой объектов в зависимости от текущего шага
+/// </summary>
+
 public class HighlightManager : MonoBehaviour
 {
     [SerializeField] private List<Outline> _lights;
@@ -13,6 +17,7 @@ public class HighlightManager : MonoBehaviour
     {
         _objects.AddRange(objects);
 
+        // Подписываемся на получение объектов, чтобы автоматически менчть подсветку
         foreach (var obj in _objects)
         {
             obj.ObjectTaken += OnLightObject;
@@ -36,6 +41,7 @@ public class HighlightManager : MonoBehaviour
 
     public  void OnLightObject(int id)
     {
+        // В начале уровня подсветка всех объектов отключена
         Debug.LogError("МЫ получили id  " + id);
         switch (id)
         {
